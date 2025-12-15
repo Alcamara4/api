@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Consultor Espiritual Meme</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light d-flex justify-content-center align-items-start min-vh-100 py-5">
+
+    <div class="magic-ball-container">
+        <div class="magic-ball shadow-lg">
+
+            <h1 class="text-center mb-4 fw-bold">Bola Magica</h1>
+
+            <div class="mb-3">
+                <input type="text" class="form-control text-center" id="pregunta" placeholder="Haz tu pregunta...">
+            </div>
+
+            <div class="d-grid mb-3">
+                <button class="btn btn-primary fw-bold" onclick="consultar()">Consultar</button>
+            </div>
+
+            <div id="resultado" class="text-center hidden">
+
+                <img id="gif" class="img-fluid rounded mt-3 mb-3" alt="respuesta">
+
+                <p id="respuesta" class="fs-5 fw-bold"></p>
+                <p id="excusa" class="text-warning"></p>
+
+            </div>
+        </div>
+    </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
