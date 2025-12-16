@@ -7,7 +7,7 @@
 
 .magic-ball {
     background: radial-gradient(circle at 30% 30%, #2a2a2a, #000);
-    width: 360px;
+    width: 500px;
     padding: 35px;
     border-radius: 50%;
     text-align: center;
@@ -30,24 +30,4 @@
 #gif {
     border-radius: 12px;
     max-width: 85%;
-}
-
-#respuesta {
-    color: #ffffff;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-}
-
-#excusa {
-    color: #ffd34d !important;
-    font-weight: bold;
-}
-
-#consejo {
-    color: #d39fff !important;
-    font-weight: bold;
-}
-
-#chiste {
-    color: #4dd2ff !important;
-    font-weight: bold;
 }

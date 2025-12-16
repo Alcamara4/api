@@ -1,18 +1,10 @@
 async function consultar() {
 
     const resultado = document.getElementById("resultado");
-    const gif = document.getElementById("gif");
-    const respuesta = document.getElementById("respuesta");
-    const excusa = document.getElementById("excusa");
-    const consejo = document.getElementById("consejo");
-    const chiste = document.getElementById("chiste");
+
+    Array.from(resultado.children).forEach(child => resultado.removeChild(child));
 
     resultado.classList.remove("hidden");
-    respuesta.textContent = "Consultando a la bola...";
-    excusa.textContent = "";
-    consejo.textContent = "";
-    chiste.textContent = "";
-    gif.removeAttribute("src");
 
     try {
 
@@ -32,9 +24,15 @@ async function consultar() {
             body.style.backgroundColor = "yellow";
         }
     
+        const respuestaP = document.createElement("p");
+        respuestaP.textContent = `La bola magica dice: ${dataYesNo.answer.toUpperCase()}`;
+        respuestaP.classList.add("text-light");
+        resultado.appendChild(respuestaP);
 
-        gif.src = dataYesNo.image;
-        respuesta.textContent = `Respuesta de la bola magica: ${dataYesNo.answer.toUpperCase()}`;
+        const gifImg = document.createElement("img");
+        gifImg.src = dataYesNo.image;
+        gifImg.id = "gif";
+        resultado.appendChild(gifImg);
 
         const resConsejo = await fetch("https://api.adviceslip.com/advice");
         const dataConsejo = await resConsejo.json();
@@ -44,7 +42,10 @@ async function consultar() {
         const dataTraduccion = await resTraduccion.json();
         const consejoTraducido = dataTraduccion.responseData.translatedText;
 
-        consejo.textContent = `Consejo de la bola: ${consejoTraducido}`;
+        const consejoP = document.createElement("p");
+        consejoP.textContent = `Consejo: ${consejoTraducido}`;
+        consejoP.classList.add("text-success");
+        resultado.appendChild(consejoP);
 
 
         if (dataYesNo.answer === "no") {
@@ -56,7 +57,11 @@ async function consultar() {
             const dataTraduccionExcusa = await resTraduccionExcusa.json();
             const excusaTraducida = dataTraduccionExcusa.responseData.translatedText;
 
-            excusa.textContent = `Excusa sugerida: ${excusaTraducida}`;
+            const excusaP = document.createElement("p");
+            excusaP.textContent = `Excusa: ${excusaTraducida}`;
+            excusaP.classList.add("text-warning")
+            resultado.appendChild(excusaP);
+            
         } else if (dataYesNo.answer === "yes") {
             const resChiste = await fetch("https://api.chucknorris.io/jokes/random");
             const dataChiste = await resChiste.json();
@@ -66,13 +71,16 @@ async function consultar() {
             const dataTraduccionChiste = await resTraduccionChiste.json();
             const chisteTraducido = dataTraduccionChiste.responseData.translatedText;
 
-            chiste.textContent = `Chiste de la bola: ${chisteTraducido}`;
-        } else {
-            excusa.textContent = "";
-            chiste.textContent = "";
+            const chisteP = document.createElement("p");
+            chisteP.textContent = `Chiste de la bola: ${chisteTraducido}`;
+            chisteP.classList.add("text-info")
+            resultado.appendChild(chisteP);
         }
 
     } catch (error) {
-        respuesta.textContent = "La bola magica no responde :(";
+        const errorP = document.createElement("p");
+        errorP.textContent = "La bola magica no responde :(";
+        errorP.id = "respuesta";
+        resultado.appendChild(errorP);
     }
 }
